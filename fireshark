@@ -1,0 +1,366 @@
+#!/bin/bash
+#
+#################################################################
+#                                                               #
+#               FireShark ... IFPS Puenteuropa                  #
+#                                                               #
+#                  Juanma Coello Romero                         #
+#                                                               #
+#               https://github.com/ShadowVMX                    #
+#                                                               #
+#################################################################
+#
+#
+#
+
+#Creamos variable para la interfaz de red:
+
+intfred=$(ip link show | grep "eth0" | cut -d" " -f2 | tr ':' ' ')
+
+#-----Llamamos a la función Figlet para introducción del Script-------#
+
+echo "$(tput setaf 6)"
+figlet IFPS PUENTEUROPA
+echo "$(tput setaf 1)"
+echo "                                                  @ShadowVMX     v1.0"
+
+#------Capturamos el ctrl_c-----------#
+
+trap finish SIGINT
+
+#-----Desarrollo del ctrl_c una vez se ha pulsado----------#
+
+function finish () {
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Ctrl_c Detected .... Saliendo ... "
+        echo " "
+        sleep 1
+        echo "$(tput setaf 6)[$(tput setaf 1)@@@@@@@@$(tput setaf 2) ¡Gracias por su aporte! $(tput setaf 1)@@@@@@@@@$(tput setaf 6)]"
+        echo " "
+        exit
+}
+
+if [[ -z $1 ]] ; then
+        echo " "
+        echo "$(tput setaf 3)[$(tput setaf 1)*$(tput setaf 3)]$(tput setaf 6) fireshark --> [OPTIONS] "
+        echo "______________________________"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -http"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -smtp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -dhcp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -dns"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -icmp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -arp"
+        echo " "
+#       echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv4"
+#       echo " "
+#       echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv6"
+#       echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -tcp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -udp"
+        echo "$(tput setaf 6) "
+        echo "______________________________"
+        echo " "
+fi
+
+
+
+if [[ $1 == "-http" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo HTTP --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "HTTP es el nombre de un protocolo el cual nos permite realizar una petición de datos y recursos, como pueden ser documentos HTML. Es la base de cualquier intercambio de datos en la Web, y un protocolo de estructura cliente-servidor, esto quiere decir que una petición de datos es iniciada por el elemento que recibirá los datos (el cliente), normalmente un navegador Web. Así, una página web completa resulta de la unión de distintos sub-documentos recibidos, como, por ejemplo: un documento que especifique el estilo de maquetación de la página web (CSS), el texto, las imágenes, vídeos, scripts, etc..."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred -s 0 'tcp port http' 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-icmp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo ICMP --> Capa 3 del modelo OSI [RED] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El protocolo de mensajes de control de Internet es parte del conjunto de protocolos IP. Es utilizado para enviar mensajes de error e información operativa indicando, por ejemplo, que un host no puede ser localizado o que un servicio que se ha solicitado no está disponible. "
+        echo " "
+        echo -n "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Haz ping a esta IP desde otro Sistema Operativo para ver las trazas ICMP: $(tput setaf 1)" && hostname -I
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred icmp -n 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-tcp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo TCP --> Capa 4 del modelo OSI [TRANSPORTE] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El Protocolo TCP/IP o Transfer Control Protocol consiste en un acuerdo estandarizado sobre el que se realiza la transmisión de datos entre los participantes de una red informática."
+
+        echo "Los programas que forman redes de datos en una red de ordenadores emplean el protocolo TCP para crear conexiones entre sí, de forma que se pueda garantizar el flujo de datos entre las partes. A través de este protocolo se asegura que los datos lleguen a su destino en el mismo orden que se transfirieron y sin errores."
+
+        echo "La inmensa mayoría de comunicaciones que se realizan en internet utilizan el protocolo TCP IP, como es el caso de navegadores, programas de intercambio de ficheros, servicios FTP y un largo etcétera."
+
+        echo "El origen de este protocolo se sitúa en 1973 y fue desarrollado por Robert E. Kahn y Vinton G. Cerf. Sin embargo, hasta ocho años después no se convirtió en un protocolo estandarizado gracias al documento RFC 793. Lo más sorprendente es que hoy en día sigue vigente."
+        echo " "
+        echo " "
+        echo "[---]Las principales características del TCP Protocol son: "
+        echo "$(tput setaf 3)"
+        echo "Es un protocolo que funciona mediante la conexión mutua entre cliente y servidor."
+        echo " "
+        echo "Ordena los segmentos provenientes del protocolo IP."
+        echo " "
+        echo "Monitorea el flujo de los datos y permite evitar la saturación de la red."
+        echo " "
+        echo "Entrega los datos al protocolo IP en forma de segmentos de longitud variable."
+        echo " "
+        echo "Permite circular de forma simultánea a la información proveniente de diferentes fuentes."
+
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred tcp 2> /dev/null
+        echo " "
+fi
+
+
+
+if [[ $1 == "-dhcp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo DHCP --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El protocolo DHCP (Protocolo de configuración dinámica de host) o también conocido como «Dynamic Host Configuration Protocol«, es un protocolo de red que utiliza una arquitectura cliente-servidor. Por tanto, tendremos uno o varios servidores DHCP y también uno o varios clientes, que se deberán comunicar entre ellos correctamente para que el servidor DHCP brinde información a los diferentes clientes conectados. Este protocolo se encarga de asignar de manera dinámica y automática una dirección IP, ya sea una dirección IP privada desde el router hacia los equipos de la red local, o también una IP pública por parte de un operador que utilice este tipo de protocolo para el establecimiento de la conexión."
+        echo " "
+        echo "Cuando tenemos un servidor DHCP en funcionamiento, todas las direcciones IP que ha proporcionado a diferentes clientes se guardan en un listado donde se relaciona la IP que se le ha proporcionado (dirección lógica) y la dirección MAC (dirección física de la tarjeta de red). Gracias a este listado, el servidor DHCP se asegura de no proporcionar a dos equipos diferentes la misma dirección IP, lo que ocasiona un caos en la red local. A medida que el servidor va asignando direcciones IP, también tiene en cuenta cuándo pasa un determinado tiempo y caducan, quedando libres para que otro cliente pueda obtener esta misma dirección IP. El servidor DHCP sabrá en todo momento quién ha estado en posesión de una dirección IP, cuánto tiempo ha estado, y cuándo se ha asignado a otro cliente."
+        echo "$(tput setaf 3) "
+        echo "[---]Si quieres probar funcionalidad: dhclient -v -r && dhclient -v"
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred port 67 or port 68 -e -n -vv 2> /dev/null
+        echo " "
+fi
+
+if [[ $1 == "-arp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo ARP --> Capa 3 del modelo OSI [RED] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "ARP son las siglas de Address Resolution Protocol. En español lo podemos traducir como Protocolo de resolución de direcciones. Es un protocolo de comunicaciones muy importante, ya que se encarga de vincular una dirección MAC o dirección física, con una dirección IP o dirección lógica. Este protocolo se desarrolló en la década de 1980 y hoy en día sigue siendo fundamental para el buen funcionamiento de las redes.!"
+
+        echo "La dirección IP se trata de un número que se le asigna y hace referencia a un equipo en una red. Tiene como fin el facilitar que estos se distingan dentro de la misma. Puede ser pública o privada. En cuanto a la primera, es la que nos facilita nuestro proveedor de internet (ISP), y que nos identifica en Internet. Por otro lado, la privada es la que se establece en los dispositivos dentro de nuestra red doméstica."
+        echo "En cuanto a la dirección MAC, es el número que identifica un componente de un equipo. En este caso, la tarjeta de red. Pueden ser utilizadas para permitir o denegar el acceso a internet de un equipo."
+        echo " "
+        echo "Se encarga de permitir que un dispositivo conectado a una red pueda obtener una ruta MAC de otro equipo que está conectado a esa misma red, es decir, se encarga de «localizar» donde están los demás dispositivos cableados o inalámbricos en la red, preguntando por la dirección MAC de cada uno de ellos enviando un paquete a la dirección de broadcast que es FF:FF:FF:FF:FF:FF. Permite transmitir datos a través de una trama, ya que este protocolo se encuentra a nivel de capa de enlace. Es importante ya que la longitud de las direcciones IP y MAC no son iguales. La primera tiene una longitud de 32 bits y la segunda de 48 bits."
+
+        echo "Por tanto, lo que hace el protocolo ARP en el procedimiento de mapeo es traducir para que los sistemas puedan reconocerse entre sí. Hoy en día la resolución de direcciones IPv4 es la más utilizada, de ahí que este protocolo sea importante. ARP se encarga de «traducir» la dirección de 32 bits a 48 bits y viceversa, realmente lo que hace este protocolo es crear una tabla con una pareja IP-MAC donde posteriormente fijarse para poder transmitir todos los datos correctamente."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -nni $intfred arp 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-smtp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo SMTP --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El protocolo para transferencia simple de correo (en inglés: Simple Mail Transfer Protocol o SMTP) es un protocolo de red utilizado para el intercambio de mensajes de correo electrónico entre computadoras u otros dispositivos (PDA, teléfonos móviles, impresoras, etc.). Se encuentra en la capa de aplicación del modelo OSI1, la última de este modelo, en la que se dispone la interfaz entre las aplicaciones de comunicación y la red que transmite los mensajes."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred 'port 25' 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-dns" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo DNS --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El sistema de nombres de dominio (DNS) es el directorio telefónico de Internet. Las personas acceden a la información en línea a través de nombres de dominio como nytimes.com o espn.com. Los navegadores web interactúan mediante direcciones de Protocolo de Internet (IP). El DNS traduce los nombres de dominio a direcciones IP para que los navegadores puedan cargar los recursos de Internet."
+        echo " "
+        echo "Cada dispositivo conectado a Internet tiene una dirección IP única que otros equipos pueden usar para encontrarlo. Los servidores DNS suprimen la necesidad de que los humanos memoricen direcciones IP tales como 192.168.1.1 (en IPv4) o nuevas direcciones IP alfanuméricas más complejas, tales como 2400:cb00:2048:1::c629:d7a2 (en IPv6)."
+        echo " "
+        echo "El proceso de solución de DNS supone convertir un nombre de servidor (como www.ejemplo.com) en una dirección IP compatible con el ordenador (como 192.168.1.1). Se da una dirección IP a cada dispositivo en Internet, y esa dirección será necesaria para encontrar el dispositivo apropiado de Internet, al igual que se usa la dirección de una calle para encontrar una casa concreta. Cuando un usuario quiere cargar una página, se debe traducir lo que el usuario escribe en su navegador web (ejemplo.com) a una dirección que el ordenador pueda entender para poder localizar la página web de ejemplo.com."
+        echo " "
+        echo "Para entender el proceso de la resolución de DNS, es importante conocer los diferentes componentes de hardware por los que debe pasar una consulta de DNS. Para el navegador web, la búsqueda de DNS se produce "en segundo plano" y no requiere ninguna interacción del ordenador del usuario, aparte de la solicitud inicial."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred port 53 2> /dev/null
+        echo " "
+fi
+
+if [[ $1 == "-udp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo UDP --> Capa 4 del modelo OSI [TRANSPORTE] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El protocolo de datagramas de usuario (en inglés: User Datagram Protocol o UDP) es un protocolo del nivel de transporte (encapsulado entre la capa de red y la capa de aplicación del modelo OSI) basado en la transmisión sin conexión de datagramas y representa una alternativa al protocolo TCP (Transmisión Control Protocol). Ese protocolo permite el envío de datagramas de forma rápida en redes IP sin establecer previamente una conexión, dado que el propio datagrama incorpora suficiente información sobre el destinatario en su cabecera1. Tampoco tiene confirmación ni control de flujo, por lo que los paquetes pueden adelantarse unos a otros; y tampoco se sabe si ha llegado correctamente, ya que no hay confirmación de entrega o recepción. Su uso principal es para protocolos como DHCP, BOOTP, DNS y demás protocolos en los que el intercambio de paquetes de la conexión/desconexión son mayores, o no son rentables con respecto a la información transmitida, así como para la transmisión de audio y vídeo en tiempo real, donde no es posible realizar retransmisiones por los estrictos requisitos de retardo que se tiene en estos casos. "
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred udp 2> /dev/null
+        echo " "
+fi
+     
