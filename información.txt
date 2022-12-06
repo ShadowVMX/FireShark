@@ -1,0 +1,5 @@
+Este script está desarrollado por Juanma Coello para IFPS Puenteuropa.
+
+Abordará los aspectos más básicos tanto teóricos cómo prácticos de redes aprendidos en el CCNA1 (ITN), y CCNA2 (SRWE)...
+
+Llevará a cabo la muestra de las distintas tablas: OSI | PDU | TCP/IP para mostrar todos los protocolos en los distintos niveles y su explicación tanto teórica cómo visualización práctica a través del sniffing.
