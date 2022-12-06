@@ -48,7 +48,7 @@ echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3)fireshark .
 echo " "
 
 chmod +x fireshark &> /dev/null
-cp fireshark /usr/bin &> /dev/null
+cp fireshark /usr/bin/ &> /dev/null
 
 echo " "
 echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Proceso Finalizado ... "
