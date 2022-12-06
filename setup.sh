@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 #
 #
 #Instalación de la herramienta fireshark.
