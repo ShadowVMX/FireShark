@@ -22,7 +22,7 @@ intfred=$(ip link show | grep "eth0" | cut -d" " -f2 | tr ':' ' ')
 echo "$(tput setaf 6)"
 figlet IFPS PUENTEUROPA
 echo "$(tput setaf 1)"
-echo "                                                  @ShadowVMX     v1.1"
+echo "                                                  @ShadowVMX     v1.2"
 
 #------Capturamos el ctrl_c-----------#
 
@@ -64,6 +64,11 @@ if [[ -z $1 ]] ; then
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -tcp"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -udp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ssh"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -telnet"
+        echo " "
         echo "$(tput setaf 6) "
         echo "______________________________"
         echo " "
@@ -431,5 +436,78 @@ if [[ $1 == "-ipv6" ]] ; then
         echo " "
         sleep 2
         tcpdump -i $intfred ip6 2> /dev/null
+        echo " "
+fi
+
+if [[ $1 == "-ssh" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo ssh --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "SSH o Secure Shell, es un protocolo de administración remota que le permite a los usuarios controlar y modificar sus servidores remotos a través de Internet a través de un mecanismo de autenticación."
+        echo " "
+        echo "Proporciona un mecanismo para autenticar un usuario remoto, transferir entradas desde el cliente al host y retransmitir la salida de vuelta al cliente. El servicio se creó como un reemplazo seguro para el Telnet sin cifrar y utiliza técnicas criptográficas para garantizar que todas las comunicaciones hacia y desde el servidor remoto sucedan de manera encriptada."
+        echo " "
+        echo "La imagen de abajo muestra una ventana típica de SSH. Cualquier usuario de Linux o macOS puede usar SSH en su servidor remoto directamente desde la ventana del terminal. Los usuarios de Windows pueden aprovechar los clientes SSH como Putty. Puedes ejecutar comandos shell de la misma manera que lo harías si estuvieras operando físicamente el equipo remoto."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred port 22 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-telnet" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo telnet --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "Cuando hablamos de Telnet nos referimos al acrónimo de Telecomunication Network. No se trata de un protocolo de red nuevo, ni mucho menos; apareció en la década de 1960. Desde entonces ha servido para que muchos usuarios puedan establecer conexiones de forma remota a través de TCP/IP."
+        echo " "
+        echo "Hay que indicar que utiliza el puerto TCP 23 para establecer esas comunicaciones de forma predeterminada. Funciona a través de la terminal, ya sea en Windows, macOS o Linux, y no tiene aplicación gráfica como sí ocurre con otros programas y protocolos más modernos."
+        echo " "
+        echo "Funciona de tal manera que es necesario tener un cliente y un servidor para poder establecer la conexión. Funciona tanto en intranet como fuera de esa red. Lo que hace básicamente es crear una conexión remota entre dos equipos. El cliente es quien envía la solicitud y el servidor responde pidiendo un nombre de usuario y contraseña. Posteriormente se establece la conexión."
+        echo " "
+        echo "A partir de ahí podemos tener acceso remoto a un equipo y utilizarlo como si estuviéramos allí físicamente. Lógicamente es necesario que ambos equipos tengan activado este protocolo."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred port 23 2> /dev/null
         echo " "
 fi
