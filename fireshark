@@ -15,14 +15,14 @@
 
 #Creamos variable para la interfaz de red:
 
-intfred=$(ip link show | grep "eth0\|ens33" | cut -d" " -f2 | tr ':' ' ')
+intfred=$(ip link show | grep "eth0" | cut -d" " -f2 | tr ':' ' ')
 
 #-----Llamamos a la función Figlet para introducción del Script-------#
 
 echo "$(tput setaf 6)"
 figlet IFPS PUENTEUROPA
 echo "$(tput setaf 1)"
-echo "                                                  @ShadowVMX     v1.0"
+echo "                                                  @ShadowVMX     v1.1"
 
 #------Capturamos el ctrl_c-----------#
 
@@ -57,10 +57,10 @@ if [[ -z $1 ]] ; then
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -arp"
         echo " "
-#       echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv4"
-#       echo " "
-#       echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv6"
-#       echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv4"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ipv6"
+        echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -tcp"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -udp"
@@ -363,4 +363,73 @@ if [[ $1 == "-udp" ]] ; then
         tcpdump -i $intfred udp 2> /dev/null
         echo " "
 fi
-     
+
+if [[ $1 == "-ipv4" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo IPv4 --> Capa 3 del modelo OSI [RED] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "IPv4 es el nombre del protocolo de Internet utilizado actualmente para las direcciones IP de los dominios. Estas direcciones IP se asignan automáticamente cuando se registra un dominio."
+        echo " "
+        echo "IPv4 utiliza direcciones de 32 bits con hasta 12 caracteres en cuatro bloques de tres caracteres cada uno, como 212.227.142.131. El sistema de nombres de dominio (DNS) los convierte en nombres de dominio como 1and1.es."
+        echo " "
+        echo "Combinando todos los dígitos es posible un máximo de casi 4.300 millones de direcciones IP que pronto se agotarán. Para seguir facilitando direcciones IP para dominios, el protocolo sucesor IPv6 ya está en uso. Sin embargo, las direcciones IPv4 existentes seguirán siendo válidas."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred ip 2> /dev/null
+        echo " "
+fi
+
+if [[ $1 == "-ipv6" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo IPv6 --> Capa 3 del modelo OSI [RED] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "IPv6 es el nombre del protocolo de Internet utilizado para las direcciones IP de los dominios. Sustituye al protocolo IPv4 actual. Las direcciones IP se asignan automáticamente cuando se registra un dominio."
+        echo " "
+        echo "IPv6 utiliza direcciones de 128 bits con un máximo de 32 caracteres en ocho bloques de cuatro caracteres cada uno, por ejemplo, 2001:0620:0000:0000:0211:24FF: FE80: C12C. El sistema de nombres de dominio (DNS) los convierte en dominios como 1and1.es."
+        echo " "
+        echo "A través de la combinación de todos los dígitos, aproximadamente 340 mil trillones de direcciones IP son posibles. Las direcciones IPv6 no reemplazarán las direcciones IPv4 ya asignadas. IPv4 e IPv6 funcionarán en paralelo durante varios años."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred ip6 2> /dev/null
+        echo " "
+fi
