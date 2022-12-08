@@ -68,7 +68,6 @@ if [[ -z $1 ]] ; then
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ssh"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -telnet"
-        echo " "
         echo "$(tput setaf 6) "
         echo "______________________________"
         echo " "
