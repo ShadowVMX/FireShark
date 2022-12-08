@@ -15,7 +15,7 @@
 
 #Creamos variable para la interfaz de red:
 
-intfred=$(ip link show | grep "eth0" | cut -d" " -f2 | tr ':' ' ')
+intfred=$(ip link show | grep "eth0\|ens33" | cut -d" " -f2 | tr ':' ' ')
 
 #-----Llamamos a la función Figlet para introducción del Script-------#
 
