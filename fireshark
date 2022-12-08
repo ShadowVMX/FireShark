@@ -35,7 +35,7 @@ function finish () {
         echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Ctrl_c Detected .... Saliendo ... "
         echo " "
         sleep 1
-        echo "$(tput setaf 6)[$(tput setaf 1)@@@@@@@@$(tput setaf 2) ¡Gracias por su aporte! $(tput setaf 1)@@@@@@@@@$(tput setaf 6)]"
+        echo "$(tput setaf 6)[$(tput setaf 1)@@@@@@@@@$(tput setaf 2) ¡Gracias por su aporte! $(tput setaf 1)@@@@@@@@@$(tput setaf 6)]"
         echo " "
         exit
 }
