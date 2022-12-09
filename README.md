@@ -20,6 +20,7 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
 
 
 ## Versión 1.0:
+
   -icmp
   
   -arp
@@ -35,6 +36,14 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
   -http
   
   -smtp
+  
+  -ssh
+  
+  -telnet
+  
+  -ipv4
+  
+  -ipv6
   
  
 ## Modelos Usados: OSI | PDU | TCP/IP
