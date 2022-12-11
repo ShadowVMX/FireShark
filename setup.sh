@@ -44,6 +44,12 @@ echo " "
 apt install figlet -y &>/dev/null
 
 echo " "
+echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3)xScan clonado [xScan -a <id.red> para ARP] ... "
+echo " "
+
+git clone https://github.com/ShadowVMX/xScan.git &>/dev/null
+
+echo " "
 echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3)fireshark ... "
 echo " "
 
