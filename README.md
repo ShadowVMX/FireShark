@@ -55,6 +55,68 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
   
   -sctp
   
+  
+## Protocolos pendientes:
+
+Protocolos de la capa 1 - Capa física
+
+    USB: Universal Serial Bus
+    Ethernet: Ethernet physical layer
+    DSL: Digital subscriber line
+    Etherloop: Combinación de Ethernet and DSL
+    Infrared: Infrared radiation
+    Frame Relay
+    SDH: Jerarquía digital síncrona
+    SONET: Red óptica sincronizada
+
+Protocolos de la capa 2 - Enlace de datos
+
+    DCAP: Protocolo de acceso del cliente de la conmutación de la transmisión de datos
+    FDDI: Interfaz de distribución de datos en fibra
+    HDLC: Control de enlace de datos de alto nivel
+    LAPD: Protocolo de acceso de enlace para los canales
+    PPP: Protocolo punto a punto
+    STP (Spanning Tree Protocol): protocolo del árbol esparcido
+    VTP VLAN: trunking virtual protocol para LAN virtual
+    MPLS: Conmutación multiprotocolo de la etiqueta
+
+Protocolos de la capa 3 - Red
+
+    ARP: Protocolo de resolución de direcciones
+    BGP: Protocolo de frontera de entrada
+    IPX: Red interna del intercambio del paquete
+    OSPF: Abrir la trayectoria más corta primero
+    RARP: Protocolo de resolución de direcciones inverso
+
+Protocolos de la capa 4 - Transporte
+
+    IL: Convertido originalmente como capa de transporte para 9P
+    SPX: Intercambio ordenado del paquete
+    iSCSI: Interfaz de sistema de computadora pequeña de Internet iSCSI
+    DCCP: Protocolo de control de congestión de datagramas
+
+Protocolos de la capa 5 - Sesión
+
+    NFS: Red de sistema de archivos
+    SMB: Bloque del mensaje del servidor
+    RPC: Llamada a procedimiento remoto
+    SDP: Protocolo directo de sockets
+    SMB: Bloque de mensajes del servidor
+    SMPP: Mensaje corto punto a punto
+
+Protocolos de la capa 6- Presentación
+
+    TLS: Seguridad de la capa de transporte
+    SSL: Capa de conexión segura
+    XDR: Extenal data representation
+    MIME: Multipurpose Internet Mail Extensions
+
+Protocolos de la capa 7 - Aplicación
+
+    HTTPS: Protocolo de transferencia de hipertexto seguro
+    POP3: Protocolo de oficina de correo
+
+
  
 ## Modelos Usados: OSI | PDU | TCP/IP
 
