@@ -22,7 +22,7 @@ intfred=$(ip link show | grep "eth0\|ens33\|wlan0" | grep "UP " | cut -d" " -f2 
 echo "$(tput setaf 6)"
 figlet IFPS PUENTEUROPA
 echo "$(tput setaf 1)"
-echo "                                                  @ShadowVMX     v1.2"
+echo "                                                  @ShadowVMX     v1.4"
 
 #------Capturamos el ctrl_c-----------#
 
