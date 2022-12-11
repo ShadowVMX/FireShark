@@ -19,7 +19,9 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
 - En este momento, fireshark se ha instalado en nuestro sistema en el PATH=/USR/BIN, por lo qué podrá ser llamado desde cualquier parte del mismo.
 
 
-## Versión 1.0:
+## Versión 1.3:
+
+  -license
 
   -icmp
   
