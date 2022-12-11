@@ -22,7 +22,7 @@ intfred=$(ip link show | grep "eth0\|ens33\|wlan0" | grep "UP " | cut -d" " -f2 
 echo "$(tput setaf 6)"
 figlet IFPS PUENTEUROPA
 echo "$(tput setaf 1)"
-echo "                                                  @ShadowVMX     v1.3"
+echo "                                                  @ShadowVMX     v1.2"
 
 #------Capturamos el ctrl_c-----------#
 
@@ -70,6 +70,14 @@ if [[ -z $1 ]] ; then
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ssh"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -telnet"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ftp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -snmp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -quic"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -sctp"
         echo "$(tput setaf 6) "
         echo "______________________________"
         echo " "
@@ -539,7 +547,152 @@ echo "SOFTWARE."
 fi
 
 
+if [[ $1 == "-ftp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo FTP --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El Protocolo de transferencia de archivos (en inglés File Transfer Protocol o FTP) es un protocolo de red para la transferencia de archivos entre sistemas conectados a una red TCP (Transmission Control Protocol), basado en la arquitectura cliente-servidor. Desde un equipo cliente se puede conectar a un servidor para descargar archivos desde él o para enviarle archivos, independientemente del sistema operativo utilizado en cada equipo."
+        echo " "
+        echo "El servicio FTP es ofrecido por la capa de aplicación del modelo de capas de red TCP/IP al usuario, utilizando normalmente el puerto de red 20 y el 21. Un problema básico de FTP es que está pensado para ofrecer la máxima velocidad en la conexión, pero no la máxima seguridad, ya que todo el intercambio de información, desde el login y password del usuario en el servidor hasta la transferencia de cualquier archivo, se realiza en texto plano sin ningún tipo de cifrado, con lo que un posible atacante puede capturar este tráfico, acceder al servidor y/o apropiarse de los archivos transferidos."
+        echo " "
+        echo "Para solucionar este problema son de gran utilidad aplicaciones como SCP y SFTP, incluidas en el paquete SSH, que permiten transferir archivos pero cifrando todo el tráfico. "
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred port ftp 2> /dev/null
+        echo " "
 
 
-#------------Fin del Script------------#
+fi
+
+
+if [[ $1 == "-snmp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo SNMP --> Capa 7 del modelo OSI [APLICACIONES] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El Protocolo simple de administración de red o SNMP (del inglés Simple Network Management Protocol) es un protocolo de la capa de aplicación que facilita el intercambio de información de administración entre dispositivos de red. Los dispositivos que normalmente soportan SNMP incluyen routers, switches, servidores, estaciones de trabajo, impresoras, bastidores de módem y muchos más. Permite a los administradores supervisar el funcionamiento de la red, buscar y resolver sus problemas, y planear su crecimiento."
+        echo " "
+        echo "SNMP es un componente de la suite de protocolo de Internet como se define por el IETF. Se compone de un conjunto de normas para la gestión de la red, incluyendo una capa de aplicación del protocolo, una base de datos de esquema, y un conjunto de objetos de datos. Las versiones de SNMP más utilizadas son SNMP versión 1 (SNMPv1) y SNMP versión 2 (SNMPv2)."
+        echo " "
+        echo "Además de incluir funciones para encriptar los paquetes de datos, SNMP en su última versión (SNMPv3) posee cambios significativos con relación a sus predecesores, sobre todo en aspectos de seguridad1; sin embargo no ha sido mayoritariamente aceptado en la industria."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred "udp and (src port 161 or 162)" 2> /dev/null
+        echo " "
+fi
+
+
+if [[ $1 == "-quic" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo QUIC --> Capa 4 del modelo OSI [TRANSPORTE] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "QUIC es nada menos que una nueva alternativa a TCP, el protocolo de transporte de Internet que lleva operativo desde 1974. Proporciona una base para nuevas aplicaciones, pero las existentes, como HTTP, se pueden adaptar para usarlo."
+        echo " "
+        echo "QUIC es un estándar de transporte seguro de uso general. Es un protocolo orientado a conexión que crea una interacción entre un cliente y un servidor."
+        echo " "
+        echo "El protocolo admite una serie de conexiones multiplexadas a través de UDP (User Datagram Protocol, integrado en Internet Protocol) y se diseñó para proporcionar una protección equivalente a TLS/SSL con una menor latencia de conexión y de transporte."
+        echo " "
+        echo "Según Google, QUIC es muy similar a TCP+TLS+HTTP/2, pero implementado sobre UDP y entre sus ventajas está una menor latencia de establecimiento de conexión, un control de congestión mejorado, corrección de errores o migración de conexión."
+        echo " "
+        echo "Los navegadores web y los servicios en Internet han estado probando la tecnología durante años, pero el reapsaldo del IETF es una señal de que el estándar es lo suficientemente maduro como para adoptarse a nivel general."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred udp port 443
+        echo " "
+fi
+
+if [[ $1 == "-sctp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo SCTP --> Capa 4 del modelo OSI [TRANSPORTE] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "El protocolo de transmisión de control de secuencias (SCTP) es un protocolo de capa de transporte que garantiza un transporte confiable y en secuencia de datos. SCTP ofrece soporte de multiconexión donde uno o ambos puntos de conexión de una conexión pueden estar compuestos por más de una dirección IP. Esto permite una conmutación por error transparente entre rutas de red redundantes."
+        echo " "
+        echo "El SCTP (stream control transmission protocol) es un protocolo fiable de la familia de protocolos de Internet que permite la transmisión de mensajes de telecomunicación a través de redes IP. Reúne diversas características de dos protocolos también encargados de la transferencia de datos: el TCP (orientado a la conexión) y el UDP (sin conexión). Además, contiene, entre otras cosas, mecanismos para controlar la congestión y mejorar la tolerancia de fallos en el envío de paquetes. Gracias a su gran flexibilidad, el SCTP también se usa para otros fines (por ejemplo, para controlar y administrar grupos de servidores)."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred sctp 2> /dev/null
+        echo " "
+fi
+
+
+#-------------Fin del Script-------------#
 
