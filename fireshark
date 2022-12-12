@@ -656,7 +656,7 @@ if [[ $1 == "-quic" ]] ; then
         echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
         echo " "
         sleep 2
-        tcpdump -i $intfred udp port 443
+        tcpdump -i $intfred udp port 443 2> /dev/null
         echo " "
 fi
 
