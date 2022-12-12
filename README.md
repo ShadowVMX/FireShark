@@ -81,7 +81,6 @@ Protocolos de la capa 2 - Enlace de datos
 
 Protocolos de la capa 3 - Red
 
-    BGP: Protocolo de frontera de entrada
     IPX: Red interna del intercambio del paquete
     OSPF: Abrir la trayectoria más corta primero
     RARP: Protocolo de resolución de direcciones inverso
