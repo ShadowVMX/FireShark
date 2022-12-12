@@ -78,6 +78,10 @@ if [[ -z $1 ]] ; then
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -quic"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -sctp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ethernet"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -bgp"
         echo "$(tput setaf 6) "
         echo "______________________________"
         echo " "
@@ -656,7 +660,7 @@ if [[ $1 == "-quic" ]] ; then
         echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
         echo " "
         sleep 2
-        tcpdump -i $intfred udp port 443 2> /dev/null
+        tcpdump -i $intfred udp port 443
         echo " "
 fi
 
@@ -693,7 +697,76 @@ if [[ $1 == "-sctp" ]] ; then
         echo " "
 fi
 
+if [[ $1 == "-ethernet" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo ETHERNET --> Capa 1 del modelo OSI [FÍSICA] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "Ethernet es un estándar de redes de área local para computadoras, por sus siglas en español Acceso Múltiple con Escucha de Portadora y Detección de Colisiones (CSMA/CD). Su nombre procede del concepto físico de éter (ether, en inglés). Ethernet define las características de cableado y señalización; de nivel físico y los formatos de tramas de datos del nivel de enlace de datos del modelo OSI. Ethernet se tomó como base para la redacción del estándar internacional IEEE 802.3, siendo usualmente tomados como sinónimos. Se diferencian en uno de los campos de la trama de datos. Sin embargo, las tramas Ethernet e IEEE 802.3 pueden coexistir en la misma zona."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred 2> /dev/null
+        echo " "
+fi
+
+if [[ $1 == "-bgp" ]] ; then
+        echo "$(tput setaf 2) "
+        echo "       OSI              PDU              TCP/IP"
+        echo "+---------------+----------------+------------------+"
+        echo "| Aplicaciones  |                |                  |"
+        echo "|_______________|                |                  |"
+        echo "| Presentación  |     Datos      |    Aplicaciones  |"
+        echo "|_______________|                |                  |"
+        echo "|   Sesión      |                |                  |"
+        echo "|_______________|________________|__________________|"
+        echo "| Transporte    |   Segmento     |    Transporte    |"
+        echo "|_______________|________________|__________________|"
+        echo "|    Red        |    Paquete     |    Internet      |"
+        echo "|_______________|________________|__________________|"
+        echo "|Enlace de datos|     Trama      |    Acceso a Red  |"
+        echo "|_______________|________________|                  |"
+        echo "|     Física    |      Bits      |                  |"
+        echo "+_______________|________________|__________________+"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Protocolo BGP --> Capa 3 del modelo OSI [RED] "
+        echo "$(tput setaf 2) "
+        echo " "
+        echo "En telecomunicaciones, el protocolo de puerta de enlace de frontera o BGP (del inglés Border Gateway Protocol)1 es un protocolo mediante el cual se intercambia información de encaminamiento entre sistemas autónomos. Por ejemplo, los proveedores de servicio registrados en Internet suelen componerse de varios sistemas autónomos y para este caso es necesario un protocolo como BGP."
+        echo " "
+        echo "Entre los sistemas autónomos de los ISP se intercambian sus tablas de rutas a través del protocolo BGP. Este intercambio de información de encaminamiento se hace entre los routers externos de cada sistema autónomo, los cuales deben ser compatibles con BGP. Se trata del protocolo más utilizado para redes con intención de configurar un protocolo de puerta de enlace exterior (Exterior Gateway Protocol)."
+        echo " "
+        echo "La forma de configurar y delimitar la información que contiene e intercambia el protocolo BGP es creando lo que se conoce como sistema autónomo o AS. Cada uno tendrá conexiones o sesiones internas (iBGP), así como sesiones externas (eBGP)."
+        echo " "
+        echo "El protocolo de puerta de enlace de frontera (BGP) es un ejemplo de protocolo de puerta de enlace exterior (EGP). BGP intercambia información de encaminamiento entre sistemas autónomos a la vez que garantiza una elección de rutas libres de bucles. Es el protocolo principal de publicación de rutas utilizado por las compañías más importantes de ISP en Internet. BGP4 es la primera versión que admite encaminamiento entre dominios sin clase (CIDR) y agregado de rutas. A diferencia de los protocolos de puerta de enlace internos (IGP), como RIP, OSPF y EIGRP, no usa métricas como número de saltos, ancho de banda o retardo. En cambio, BGP toma decisiones de encaminamiento basándose en políticas de la red, o reglas que utilizan varios atributos de ruta BGP."
+        echo " "
+        echo "$(tput setaf 1)[$(tput setaf 2)-->$(tput setaf 1)]$(tput setaf 6) Sniffing process: "
+        echo " "
+        sleep 2
+        tcpdump -i $intfred tcp port 179 2> /dev/null
+        echo " "
+fi
+
 
 #-------------Fin del Script-------------#
 
 
+           
