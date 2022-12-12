@@ -61,7 +61,6 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
 Protocolos de la capa 1 - Capa física
 
     USB: Universal Serial Bus
-    Ethernet: Ethernet physical layer
     DSL: Digital subscriber line
     Etherloop: Combinación de Ethernet and DSL
     Infrared: Infrared radiation
