@@ -55,6 +55,10 @@ FireShark es un script simple desarrollado en BASH qué tiene cómo objetivo vis
   
   -sctp
   
+  -bgp
+  
+  -ethernet
+  
   
 ## Protocolos pendientes:
 
