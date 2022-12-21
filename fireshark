@@ -82,6 +82,8 @@ if [[ -z $1 ]] ; then
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -ethernet"
         echo " "
         echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -bgp"
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 2)*$(tput setaf 6)]$(tput setaf 3) fireshark -port <443>"
         echo "$(tput setaf 6) "
         echo "______________________________"
         echo " "
@@ -766,7 +768,26 @@ if [[ $1 == "-bgp" ]] ; then
 fi
 
 
+if [[ $1 == "-port" ]] && ! [[ -z $2 ]] ; then
+        echo " "
+        if [[ $EUID == 0 ]] ; then
+                echo " "
+                echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Este has de abrirlo sin ser root ... "
+                echo " "
+                sleep 1
+                exit
+        fi
+        sleep 1
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Openning Port Firefox Check ..."
+        echo " "
+        firefox "https://es.adminsub.net/tcp-udp-port-finder/$2" & disown
+        echo " "
+        echo "$(tput setaf 6)[$(tput setaf 1)*$(tput setaf 6)]$(tput setaf 3)Realizado con éxito."
+        echo " "
+        sleep 1
+        exit
+fi
+
+
 #-------------Fin del Script-------------#
 
-
-           
